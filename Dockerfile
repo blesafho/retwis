@@ -5,4 +5,5 @@ RUN mkdir /app
 WORKDIR /app
 COPY . /app
 
-CMD ["php", "-S", "0.0.0.0:80", "index.php"]
+EXPOSE 9000
+#CMD ["php", "-S", "0.0.0.0:80", "index.php"]
