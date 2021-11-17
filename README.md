@@ -3,7 +3,7 @@ written using Redis and PHP. The source code is designed to be very simple and
 at the same time to show different Redis data structures.
 
 You can find a tutorial explaining step by step how the example was created
-in the [Twitter clone tutorial of the Redis documentation](http://redis.io/topics/twitter-clone).
+in the [Twitter clone tutorial of the Redis documentation](https://redis.io/topics/twitter-clone).
 
 This code was written back in 2009 when Redis was initially published, in order
 to expose interested developers to the Redis concepts and data types.
