@@ -1,10 +1,14 @@
 #FROM registry.spbe.sangkuriang.co.id/microtester/apm:php-alpine
-FROM php:7.4-fpm-alpine
+#FROM php:7.4-fpm-alpine
 #COPY ./elastic-apm.ini /opt/elastic/apm-agent-php/etc/elastic-apm-custom.ini
 #RUN mkdir /app
 #WORKDIR /var/www/html
-COPY . .
+#COPY . .
+#RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-EXPOSE 9000
+#EXPOSE 9000
 #CMD ["php-fpm"]
 #CMD ["php", "-S", "0.0.0.0:80", "index.php"]
+
+FROM php:7.2-apache
+COPY . /var/www/html/
