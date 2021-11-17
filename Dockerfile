@@ -6,4 +6,5 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 EXPOSE 9000
+CMD ["php-fpm"]
 #CMD ["php", "-S", "0.0.0.0:80", "index.php"]
