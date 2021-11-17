@@ -4,6 +4,6 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: registry.spbe.sangkuriang.co.id/microtester/apm:redis-apache
+      tag: registry.spbe.sangkuriang.co.id/microtester/apm:redis:-${CICD_EXECUTION_SEQUENCE}
       pushRemote: true
       registry: registry.spbe.sangkuriang.co.id
