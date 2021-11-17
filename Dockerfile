@@ -1,14 +1,5 @@
-#FROM registry.spbe.sangkuriang.co.id/microtester/apm:php-alpine
-#FROM php:7.4-fpm-alpine
 #COPY ./elastic-apm.ini /opt/elastic/apm-agent-php/etc/elastic-apm-custom.ini
-#RUN mkdir /app
-#WORKDIR /var/www/html
-#COPY . .
-#RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
-
-#EXPOSE 9000
-#CMD ["php-fpm"]
-#CMD ["php", "-S", "0.0.0.0:80", "index.php"]
-
-FROM php:7.2-apache
-COPY . /var/www/html/
+FROM php:7.4-apache
+RUN curl -fsLO https://github.com/elastic/apm-agent-php/releases/download/v1.3.1/apm-agent-php_1.3.1_all.deb
+RUN dpkg -i apm-agent-php_1.3.1_all.deb.deb
+#COPY src/ /var/www/html/
