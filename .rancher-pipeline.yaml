@@ -4,10 +4,10 @@ stages:
   - runScriptConfig:
       image: busybox
       shellScript: |-
-        if [[ "${CICD_GIT_BRANCH}" == "master" && "${CICD_CLUSTER_ID}" != "c-blkmc" ]]
+        if [[ "${CICD_GIT_BRANCH}" == "master" && "${CICD_CLUSTER_ID}" != "c-7j2fq" ]]
           then
             exit 1
-        elif [[ "${CICD_GIT_BRANCH}" == "develop" && "${CICD_CLUSTER_ID}" != "c-7j2fq" ]]
+        elif [[ "${CICD_GIT_BRANCH}" == "develop" && "${CICD_CLUSTER_ID}" != "c-blkmc" ]]
           then
             exit 1
         fi
