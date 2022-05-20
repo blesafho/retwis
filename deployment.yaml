@@ -25,11 +25,11 @@ spec:
               name: webserver
           resources:
             limits:
-              cpu: 200m
+              cpu: 500m
               memory: 512Mi
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 200m
+              memory: 256Mi
 ---
 apiVersion: v1
 kind: Service
@@ -97,3 +97,6 @@ spec:
       target:
         type: Utilization
         averageUtilization: 70
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60
