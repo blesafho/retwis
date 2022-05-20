@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ${CICD_GIT_REPO_NAME}
@@ -23,13 +23,6 @@ spec:
           ports:
             - containerPort: 80
               name: webserver
-          resources:
-          limits:
-            cpu: 200m
-            memory: 512Mi
-          requests:
-            cpu: 100m
-            memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
