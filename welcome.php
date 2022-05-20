@@ -28,7 +28,7 @@
 </tr></table>
 </form>
 </div>
-Hello! Retwis is a very simple clone of <a href="https://twitter.com">Twitter</a>, as a demo for the <a href="https://code.google.com/p/redis/">Redis</a> key-value database. Key points:
+Retwis is a very simple clone of <a href="https://twitter.com">Twitter</a>, as a demo for the <a href="https://code.google.com/p/redis/">Redis</a> key-value database. Key points:
 <ul>
 <li>Redis is a key-value DB, and it is <b>the only DB used</b> by this application, no MySQL or alike at all.</li>
 <li>This application can scale horizontally since there is no point where the whole dataset is needed at the same point. With consistent hashing (not implemented in the demo to make it simpler) different keys can be stored in different servers.</li>
