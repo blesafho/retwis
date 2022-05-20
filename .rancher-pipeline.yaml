@@ -16,7 +16,7 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: registry.dev.layanan.go.id/microtester/apm:redis-${CICD_EXECUTION_SEQUENCE}
+      tag: registry.dev.layanan.go.id/microtester/${CICD_GIT_REPO_NAME}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
       pushRemote: true
       registry: registry.dev.layanan.go.id
 - name: Deploy
