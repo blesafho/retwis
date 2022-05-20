@@ -79,6 +79,8 @@ spec:
 apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
+  annotations:
+    field.cattle.io/displayName: hpa-${CICD_GIT_REPO_NAME}
   name: hpa-${CICD_GIT_REPO_NAME}
   namespace: asdf
 spec:
