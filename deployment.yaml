@@ -75,3 +75,23 @@ spec:
     - hosts:
       - ooo.spbe.sangkuriang.co.id
       secretName: spbe-sangkuriang
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa-${CICD_GIT_REPO_NAME}
+  namespace: asdf
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ${CICD_GIT_REPO_NAME}
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
