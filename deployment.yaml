@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${CICD_GIT_REPO_NAME}
+  namespace: asdf
+  labels:
+    workload.user.cattle.io/workloadselector: deployment-asdf-${CICD_GIT_REPO_NAME}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-asdf-${CICD_GIT_REPO_NAME}
+  template:
+    metadata:
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-asdf-${CICD_GIT_REPO_NAME}
+    spec:
+      imagePullSecrets:
+        - name: ext-docker-registry
+      containers:
+        - name: asdf-${CICD_GIT_REPO_NAME}
+          image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
+          ports:
+            - containerPort: 80
+              name: webserver
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: asdf-${CICD_GIT_REPO_NAME}
+  namespace: asdf
+  annotations:
+    field.cattle.io/targetWorkloadIds: '["deployment:asdf:${CICD_GIT_REPO_NAME}"]'
+    workload.cattle.io/targetWorkloadIdNoop: "true"
+    workload.cattle.io/workloadPortBased: "true"
+spec:
+  clusterIP: None
+  clusterIPs:
+    - None
+  ports:
+    - name: webserver
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    workload.user.cattle.io/workloadselector: deployment-asdf-${CICD_GIT_REPO_NAME}
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ${CICD_GIT_REPO_NAME}-in
+  namespace: asdf
+spec:
+  rules:
+    - host: ooo.spbe.sangkuriang.co.id
+      http:
+        paths:
+        - backend:
+            service:
+              name: asdf-${CICD_GIT_REPO_NAME}
+              port:
+                number: 80
+          path: /
+          pathType: ImplementationSpecific
+  tls:
+    - hosts:
+      - ooo.spbe.sangkuriang.co.id
+      secretName: spbe-sangkuriang
