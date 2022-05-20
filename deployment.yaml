@@ -18,7 +18,7 @@ spec:
       imagePullSecrets:
         - name: ext-docker-registry
       containers:
-        - name: asdf-${CICD_GIT_REPO_NAME}
+        - name: dep-${CICD_GIT_REPO_NAME}
           image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
           ports:
             - containerPort: 80
@@ -34,7 +34,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: asdf-${CICD_GIT_REPO_NAME}
+  name: svc-${CICD_GIT_REPO_NAME}
   namespace: asdf
   annotations:
     field.cattle.io/targetWorkloadIds: '["deployment:asdf:${CICD_GIT_REPO_NAME}"]'
@@ -57,7 +57,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ${CICD_GIT_REPO_NAME}-in
+  name: in-${CICD_GIT_REPO_NAME}
   namespace: asdf
 spec:
   rules:
@@ -66,7 +66,7 @@ spec:
         paths:
         - backend:
             service:
-              name: asdf-${CICD_GIT_REPO_NAME}
+              name: svc-${CICD_GIT_REPO_NAME}
               port:
                 number: 80
           path: /
@@ -76,14 +76,14 @@ spec:
       - ooo.spbe.sangkuriang.co.id
       secretName: spbe-sangkuriang
 ---
-apiVersion: autoscaling/v2
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   name: hpa-${CICD_GIT_REPO_NAME}
   namespace: asdf
 spec:
   scaleTargetRef:
-    apiVersion: apps/v1
+    apiVersion: apps/v1beta2
     kind: Deployment
     name: ${CICD_GIT_REPO_NAME}
   minReplicas: 2
