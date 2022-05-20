@@ -1,7 +1,7 @@
 <div id="welcomebox">
 <div id="registerbox">
 <h2>Register!</h2>
-<b>Hej! Want to try Retwis? Create an account!</b>
+<b>Want to try Retwis? Create an account!</b>
 <form method="POST" action="register.php">
 <table>
 <tr>
