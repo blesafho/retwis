@@ -24,7 +24,7 @@ class ConnectionParameters implements ConnectionParametersInterface
 
     private static $defaults = array(
         'scheme' => 'tcp',
-        'host' => 'redis.microtester.svc.cluster.local',
+        'host' => 'redis.asdf.svc.cluster.local',
         'port' => 6379,
         'timeout' => 5.0,
     );
