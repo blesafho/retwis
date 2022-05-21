@@ -16,7 +16,7 @@ spec:
         workload.user.cattle.io/workloadselector: deployment-asdf-${CICD_GIT_REPO_NAME}
     spec:
       imagePullSecrets:
-        - name: ext-docker-registry
+        - name: pipeline-docker-registry
       containers:
         - name: dep-${CICD_GIT_REPO_NAME}
           image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
