@@ -14,7 +14,7 @@ spec:
         workload.user.cattle.io/workloadselector: apps.deployment-asdf-retwis-app
     spec:
       containers:
-      - image: registry.dev.layanan.go.id/microtester/retwis:master-${CICD_EXECUTION_SEQUENCE}
+      - image: registry.dev.layanan.go.id/microtester/retwis:master-6
         name: retwis-app
         imagePullPolicy: Always
         ports:
@@ -29,18 +29,3 @@ spec:
             memory: 128Mi
       imagePullSecrets:
       - name: pipeline-docker-registry
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: retwis-svc
-  namespace: asdf
-spec:
-  selector:
-    workload.user.cattle.io/workloadselector: apps.deployment-asdf-retwis-app
-  ports:
-    - name: webserver
-      port: 80
-      protocol: TCP
-      targetPort: 80
-  type: ClusterIP
