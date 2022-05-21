@@ -15,6 +15,7 @@ spec:
     spec:
       containers:
       - image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
+        name: ${CICD_GIT_REPO_NAME}-app
         imagePullPolicy: Always
         ports:
         - containerPort: 80
