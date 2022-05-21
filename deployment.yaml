@@ -3,33 +3,31 @@ kind: Deployment
 metadata:
   name: ${CICD_GIT_REPO_NAME}-app
   namespace: asdf
-  labels:
-    app: ${CICD_GIT_REPO_NAME}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ${CICD_GIT_REPO_NAME}
+      workload.user.cattle.io/workloadselector: apps.deployment-asdf-${CICD_GIT_REPO_NAME}-app
   template:
     metadata:
       labels:
-        app: ${CICD_GIT_REPO_NAME}
+        workload.user.cattle.io/workloadselector: apps.deployment-asdf-${CICD_GIT_REPO_NAME}-app
     spec:
-      imagePullSecrets:
-        - name: pipeline-docker-registry
       containers:
-        - name: ${CICD_GIT_REPO_NAME}-app
-          image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
-          ports:
-            - containerPort: 80
-              name: webserver
-          resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
-            requests:
-              cpu: 200m
-              memory: 256Mi
+      - image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: webserver
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+      imagePullSecrets:
+      - name: pipeline-docker-registry
 ---
 apiVersion: v1
 kind: Service
@@ -38,9 +36,10 @@ metadata:
   namespace: asdf
 spec:
   selector:
-    app: ${CICD_GIT_REPO_NAME}
-  type: NodePort
+    workload.user.cattle.io/workloadselector: apps.deployment-asdf-${CICD_GIT_REPO_NAME}-app
   ports:
-    - protocol: TCP
+    - name: webserver
       port: 80
+      protocol: TCP
       targetPort: 80
+  type: ClusterIP
