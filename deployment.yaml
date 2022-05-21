@@ -19,13 +19,6 @@ spec:
         ports:
         - containerPort: 80
           name: webserver
-        resources:
-          limits:
-            cpu: 500m
-            memory: 512Mi
-          requests:
-            cpu: 100m
-            memory: 128Mi
       imagePullSecrets:
       - name: pipeline-docker-registry
 ---
