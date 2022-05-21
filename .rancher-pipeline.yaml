@@ -1,24 +1,10 @@
 stages:
-- name: Filter
-  steps:
-  - runScriptConfig:
-      image: busybox
-      shellScript: |-
-        if [[ "${CICD_GIT_BRANCH}" == "master" && "${CICD_CLUSTER_ID}" != "c-7j2fq" ]]
-          then
-            exit 1
-        elif [[ "${CICD_GIT_BRANCH}" == "develop" && "${CICD_CLUSTER_ID}" != "c-blkmc" ]]
-          then
-            exit 1
-        fi
 - name: Publish
   steps:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: registry.dev.layanan.go.id/microtester/${CICD_GIT_REPO_NAME}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
-      pushRemote: true
-      registry: registry.dev.layanan.go.id
+      tag: ${CICD_GIT_REPO_NAME}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
 - name: Deploy
   steps:
   - applyYamlConfig:
