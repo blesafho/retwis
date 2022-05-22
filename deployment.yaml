@@ -14,7 +14,7 @@ spec:
         workload.user.cattle.io/workloadselector: apps.deployment-asdf-retwis-app
     spec:
       containers:
-      - image: registry.dev.layanan.go.id/microtester/retwis:master-6
+      - image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
         name: retwis-app
         imagePullPolicy: Always
         ports:
