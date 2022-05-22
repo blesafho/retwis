@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${CICD_GIT_REPO_NAME}-app
+  name: retwis-app
   namespace: asdf
 spec:
   replicas: 1
   selector:
     matchLabels:
-      workload.user.cattle.io/workloadselector: apps.deployment-asdf-${CICD_GIT_REPO_NAME}-app
+      workload.user.cattle.io/workloadselector: apps.deployment-asdf-retwis-app
   template:
     metadata:
       labels:
-        workload.user.cattle.io/workloadselector: apps.deployment-asdf-${CICD_GIT_REPO_NAME}-app
+        workload.user.cattle.io/workloadselector: apps.deployment-asdf-retwis-app
     spec:
       containers:
       - image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
-        name: ${CICD_GIT_REPO_NAME}-app
+        name: retwis-app
         imagePullPolicy: Always
         ports:
         - containerPort: 80
