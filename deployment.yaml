@@ -14,7 +14,7 @@ spec:
         workload.user.cattle.io/workloadselector: apps.deployment-asdf-retwis-app
     spec:
       containers:
-      - image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
+      - image: ${CICD_IMAGE}:${CICD_GIT_BRANCH}-anri-${CICD_EXECUTION_SEQUENCE}
         name: retwis-app
         imagePullPolicy: Always
         ports:
